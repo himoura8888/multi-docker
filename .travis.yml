@@ -3,22 +3,22 @@ services:
  - docker
 
 before_install:
- - docker build -t himoura/react-test -f ./client/Dockerfile.dev ./client
+ - docker build -t fredprodocker/react-test -f ./client/Dockerfile.dev ./client
 
 script:
- - docker run -e CI=true himoura/react-test npm test
+ - docker run -e CI=true fredprodocker/react-test npm test
 
 after_success:
- - docker build -t himoura/multi-client ./client
- - docker build -t himoura/multi-nginx ./nginx
- - docker build -t himoura/multi-server ./server
- - docker build -t himoura/multi-worker ./worker
+ - docker build -t fredprodocker/multi-client ./client
+ - docker build -t fredprodocker/multi-nginx ./nginx
+ - docker build -t fredprodocker/multi-server ./server
+ - docker build -t fredprodocker/multi-worker ./worker
 
 # log in to the docker CLI
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 # Take those images and push them to docker hub
- - docker push himoura/multi-client
- - docker push himoura/multi-nginx
- - docker push himoura/multi-server
- - docker push himoura/multi-worker
+ - docker push fredprodocker/multi-client
+ - docker push fredprodocker/multi-nginx
+ - docker push fredprodocker/multi-server
+ - docker push fredprodocker/multi-worker
